@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mon Jardin Pomodoro 🌷</title>
+
+    <meta name="description"
+          content="Un petit jardin fleuri pour se concentrer et prendre des pauses.">
+
+    <!-- Polices d'écriture -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap"
+          rel="stylesheet">
+
+    <!-- Feuille de style -->
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- En-tête -->
+        <header class="header">
+            <a href="#" class="logo">
+                <span class="logo-flower">✿</span>
+                Mon petit jardin
+            </a>
+
+            <button class="settings-button"
+                    id="open-settings"
+                    aria-label="Ouvrir les réglages">
+                ⚙ Réglages
+            </button>
+        </header>
+
+        <!-- Présentation -->
+        <section class="intro">
+            <p class="eyebrow">UN PETIT MOMENT POUR TOI</p>
+
+            <h1>
+                Cultive ta <span>concentration.</span>
+            </h1>
+
+            <p class="subtitle">
+                Respire, ralentis et laisse fleurir tes idées.
+            </p>
+        </section>
+
+
+        <!-- Espace de travail : minuteur + tâches -->
+        <div class="workspace-grid">
+
+            
+            <!-- Liste des tâches à classer -->
+            <section class="task-card task-card-tolist" aria-labelledby="backlog-heading">
+                <div class="task-header">
+                    <p class="eyebrow">LES IDÉES À FAIRE FLEURIR</p>
+                    <h2 id="backlog-heading">À classer ✿</h2>
+                </div>
+
+                <p class="list-description">
+                    Les choses à faire, sans obligation immédiate.
+                </p>
+
+                <button class="add-task-button" id="open-task-dialog-backlog" type="button">
+                    ＋ Ajouter une tâche
+                </button>
+
+                <ul class="task-list" id="task-list-backlog"></ul>
+
+                <p class="list-empty" id="backlog-empty">
+                    Ton esprit est libre : aucune tâche à classer.
+                </p>
+            </section>
+
+
+            <!-- Minuteur existant -->
+            <section class="timer-card">
+
+                <div class="flower-decoration flower-left"
+                    aria-hidden="true">✿</div>
+
+                <div class="flower-decoration flower-right"
+                    aria-hidden="true">❀</div>
+
+                <div class="mode-selector" role="group"
+                    aria-label="Mode du minuteur">
+
+                    <button class="mode-button active"
+                            data-mode="work"
+                            aria-pressed="true">
+                        🍅 Concentration
+                    </button>
+
+                    <button class="mode-button"
+                            data-mode="short"
+                            aria-pressed="false">
+                        ☕ Petite pause
+                    </button>
+
+                    <button class="mode-button"
+                            data-mode="long"
+                            aria-pressed="false">
+                        🌿 Grande pause
+                    </button>
+                </div>
+
+                <div class="timer-circle" id="timer-circle">
+                    <svg class="progress-ring"
+                        viewBox="0 0 260 260"
+                        aria-hidden="true">
+                        <circle class="progress-background"
+                                cx="130" cy="130" r="116"></circle>
+                        <circle class="progress-bar"
+                                id="progress-bar"
+                                cx="130" cy="130" r="116"></circle>
+                    </svg>
+
+                    <div class="timer-content">
+                        <p class="timer-label" id="timer-label">
+                            C'est le moment de fleurir 🌷
+                        </p>
+                        <div class="timer-display"
+                            id="timer-display"
+                            role="timer"
+                            aria-label="Temps restant">25:00</div>
+                        <p class="timer-caption" id="timer-caption">
+                            Une chose à la fois.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timer-controls">
+                    <button class="secondary-button"
+                            id="reset-button"
+                            aria-label="Réinitialiser le minuteur">↺</button>
+
+                    <button class="start-button" id="start-button">
+                        <span id="start-icon">▶</span>
+                        <span id="start-text">Commencer</span>
+                    </button>
+
+                    <button class="secondary-button"
+                            id="skip-button"
+                            aria-label="Passer à la session suivante">↠</button>
+                </div>
+
+				<p class="session-info" id="session-info">
+					Session 1
+				</p>
+
+				<p class="flower-caption">
+					Chaque petit pas compte
+				</p>
+
+				<div
+					class="session-flowers"
+					id="session-flowers"
+					role="img"
+					aria-label="Progression des sessions de concentration"
+				>
+					<span class="session-flower" aria-hidden="true">✿</span>
+					<span class="session-flower" aria-hidden="true">✿</span>
+					<span class="session-flower" aria-hidden="true">✿</span>
+					<span class="session-flower" aria-hidden="true">✿</span>
+				</div>
+            </section>
+
+            
+            <!-- Liste des tâches à faire maintenant -->
+            <section class="task-card task-card-today" aria-labelledby="now-heading">
+                <div class="task-header">
+                    <p class="eyebrow">MES PRIORITÉS DU MOMENT</p>
+                    <h2 id="now-heading">À faire maintenant ✿</h2>
+                </div>
+
+                <p class="list-description">
+                    Choisis quelques tâches et avance à ton rythme.
+                </p>
+
+                <button class="add-task-button" id="open-task-dialog-now" type="button">
+                    ＋ Ajouter une tâche
+                </button>
+
+                <ul class="task-list" id="task-list-now"></ul>
+
+                <p class="list-empty" id="now-empty">
+                    Rien à faire maintenant. Tu peux souffler.
+                </p>
+
+                <p class="task-summary" id="task-summary">
+                    0 tâche terminée sur 0.
+                </p>
+                <p class="task-time" id="task-time">
+                    Temps nécessaire global : 0h00
+                </p>
+                <p class="task-rest-time" id="task-rest-time">
+                    Temps nécessaire restant : 0h00
+                </p>
+            </section>
+
+        </div>
+
+
+        <!-- Planning des deux prochaines semaines -->
+        <section class="planning-card" aria-labelledby="planning-heading">
+            <div class="planning-header">
+                <div>
+                    <p class="eyebrow">PRENDRE LE TEMPS DE S'ORGANISER</p>
+                    <h2 id="planning-heading">Mon jardin sur deux semaines</h2>
+                    <p class="list-description">
+                        Choisis un jour dans la liste « À classer » pour planifier une tâche.
+                    </p>
+                </div>
+            </div>
+
+            <div class="planning-scroll">
+                <div class="planning-grid" id="planning-grid"></div>
+            </div>
+        </section>
+
+
+        <!-- Carte inspirante, conservée sous l'espace de travail -->
+        <section class="quote-card">
+            <span class="quote-flower" aria-hidden="true">✿</span>
+            <p>« Prends le temps de faire les choses avec douceur. »</p>
+            <span class="quote-caption">TON RAPPEL DU JOUR</span>
+        </section>
+
+        <footer class="footer">
+            Fait avec douceur et quelques fleurs ♡
+        </footer>
+
+    </main>
+
+
+<!-- Fenêtre de création d'une tâche -->
+<dialog class="settings-dialog task-dialog" id="task-dialog">
+    <form id="task-form">
+        <div class="dialog-header">
+            <div>
+                <p class="eyebrow">UNE GRAINE À PLANTER</p>
+                <h2>Nouvelle tâche</h2>
+            </div>
+
+            <button type="button"
+                    class="close-button"
+                    id="close-task-dialog"
+                    aria-label="Fermer">×</button>
+        </div>
+
+        <p class="settings-description">
+            Découpe tes projets en petits pas réalisables.
+        </p>
+
+        <label class="task-form-label" for="task-title-input">
+            Titre de la tâche
+        </label>
+        <input class="task-title-input"
+               id="task-title-input"
+               name="title"
+               type="text"
+               maxlength="120"
+               placeholder="Ex. Préparer ma présentation"
+               required>
+
+        <label class="task-form-label" for="task-sessions-input">
+            Sessions de concentration nécessaires
+        </label>
+        <div class="task-sessions-field">
+            <input id="task-sessions-input"
+                   name="sessions"
+                   type="number"
+                   min="1"
+                   max="99"
+                   value="1"
+                   required>
+            <span>session(s)</span>
+        </div>
+
+        <button type="submit" class="start-button save-button">
+            Ajouter à ma liste ♡
+        </button>
+    </form>
+</dialog>
+
+
+    <!-- Fenêtre des réglages -->
+    <dialog class="settings-dialog" id="settings-dialog">
+
+        <form id="settings-form">
+
+            <div class="dialog-header">
+                <div>
+                    <p class="eyebrow">TON PETIT JARDIN</p>
+                    <h2>Personnalise ton rythme</h2>
+                </div>
+
+                <button type="button"
+                        class="close-button"
+                        id="close-settings"
+                        aria-label="Fermer les réglages">
+                    ×
+                </button>
+            </div>
+
+            <p class="settings-description">
+                Choisis les durées qui te conviennent.
+            </p>
+
+            <label class="setting-row">
+                <span>🍅 Concentration</span>
+
+                <span class="number-input">
+                    <input type="number"
+                           id="work-input"
+                           min="1"
+                           max="180"
+                           value="25"
+                           required>
+                    <span>min</span>
+                </span>
+            </label>
+
+            <label class="setting-row">
+                <span>☕ Petite pause</span>
+
+                <span class="number-input">
+                    <input type="number"
+                           id="short-input"
+                           min="1"
+                           max="60"
+                           value="5"
+                           required>
+                    <span>min</span>
+                </span>
+            </label>
+
+            <label class="setting-row">
+                <span>🌿 Grande pause</span>
+
+                <span class="number-input">
+                    <input type="number"
+                           id="long-input"
+                           min="1"
+                           max="90"
+                           value="15"
+                           required>
+                    <span>min</span>
+                </span>
+            </label>
+
+            <label class="setting-row">
+                <span>Sessions avant la grande pause</span>
+
+                <span class="number-input">
+                    <input type="number"
+                           id="cycles-input"
+                           min="1"
+                           max="12"
+                           value="4"
+                           required>
+                </span>
+            </label>
+
+            <button type="submit"
+                    class="start-button save-button">
+                Enregistrer mes réglages ♡
+            </button>
+
+        </form>
+
+    </dialog>
+
+    <!-- Zone de notification accessible -->
+    <p class="visually-hidden"
+       id="announcement"
+       aria-live="polite">
+    </p>
+
+    <script src="js/dom.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/pomodoro-state.js"></script>
+    <script src="js/pomodoro-controls.js"></script>
+    <script src="js/pomodoro-sessions.js"></script>
+    <script src="js/pomodoro-settings.js"></script>
+    <script src="js/planner.js"></script>
+    <script src="js/tasks-data.js"></script>
+    <script src="js/tasks-render.js"></script>
+    <script src="js/task-dialog.js"></script>
+</body>
+
+</html>
