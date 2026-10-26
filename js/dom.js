@@ -33,7 +33,7 @@ const taskDialog = document.getElementById("task-dialog");
 const taskForm = document.getElementById("task-form");
 const closeTaskDialog = document.getElementById("close-task-dialog");
 const taskTitleInput = document.getElementById("task-title-input");
-const taskSessionsInput = document.getElementById("task-sessions-input");
+const taskMinutesInput = document.getElementById("task-minutes-input");
 
 const openBacklogDialog = document.getElementById("open-task-dialog-backlog");
 const openNowDialog = document.getElementById("open-task-dialog-now");

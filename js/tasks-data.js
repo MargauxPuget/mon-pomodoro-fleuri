@@ -13,13 +13,17 @@ function loadTasks() {
             .filter(task =>
                 task &&
                 typeof task.id === "string" &&
-                typeof task.title === "string" &&
-                Number.isInteger(task.sessions) &&
-                task.sessions >= 1 &&
-                task.sessions <= 99
+                typeof task.title === "string"
             )
             .map(task => {
-            let plannedDate = null;
+                const minutes =
+                    Number.isInteger(task.minutes) && task.minutes >= 1
+                        ? task.minutes
+                        : Number.isInteger(task.sessions) && task.sessions >= 1
+                            ? task.sessions * settings.work
+                            : 25;
+
+                let plannedDate = null;
 
             // Conserver les anciennes tâches déjà planifiées.
             if (
@@ -41,10 +45,8 @@ function loadTasks() {
 
             return {
                 ...task,
+                minutes,
                 completed: task.completed === true,
-                status: task.status === "now" ? "now" : "backlog",
-                plannedDate,
-                needsReschedule: task.needsReschedule === true
             };
         });
     } catch (error) {

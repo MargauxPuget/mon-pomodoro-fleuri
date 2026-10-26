@@ -51,12 +51,11 @@ function createTaskTitle(task) {
 }
 
 function createTaskSessions(task) {
-    const sessions = document.createElement("span");
-    sessions.className = "task-item-sessions";
-    sessions.textContent =
-        `${task.sessions} session${task.sessions > 1 ? "s" : ""}`;
+    const duration = document.createElement("span");
+    duration.className = "task-item-sessions";
+    duration.textContent = `${task.minutes} min`;
 
-    return sessions;
+    return duration;
 }
 
 function createTaskRow(task, location) {
@@ -148,13 +147,13 @@ function renderTasks() {
         `${completedCount} tâche${completedCount > 1 ? "s" : ""} terminée${completedCount > 1 ? "s" : ""} sur ${totalCount}.`;
 
     const totalMinutes = nowTasks.reduce(
-        (sum, task) => sum + task.sessions * settings.work,
-        0
-    );
+    (sum, task) => sum + (Number(task.minutes) || 0),
+    0
+);
 
-    const remainingMinutes = nowTasks
-        .filter(task => !task.completed)
-        .reduce((sum, task) => sum + task.sessions * settings.work, 0);
+const remainingMinutes = nowTasks
+    .filter(task => !task.completed)
+    .reduce((sum, task) => sum + (Number(task.minutes) || 0), 0);
 
     taskTime.textContent =
         `Temps nécessaire global : ${formatDuration(totalMinutes)}`;

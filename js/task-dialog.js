@@ -3,7 +3,7 @@
 function openTaskDialog(target) {
     taskCreationTarget = target;
     taskForm.reset();
-    taskSessionsInput.value = "1";
+    taskMinutesInput.value = "25";
     taskDialog.showModal();
     taskTitleInput.focus();
 }
@@ -30,22 +30,22 @@ taskForm.addEventListener("submit", event => {
     event.preventDefault();
 
     const title = taskTitleInput.value.trim();
-    const sessions = Number(taskSessionsInput.value);
+    const minutes = Number(taskMinutesInput.value);
 
     if (!title) {
         taskTitleInput.focus();
         return;
     }
 
-    if (!Number.isInteger(sessions) || sessions < 1 || sessions > 99) {
-        taskSessionsInput.focus();
+    if (!Number.isInteger(minutes) || minutes < 1) {
+        taskMinutesInput.focus();
         return;
     }
 
     tasks.push({
         id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
         title,
-        sessions,
+        minutes,
         completed: false,
         status: taskCreationTarget,
         plannedDate: null,

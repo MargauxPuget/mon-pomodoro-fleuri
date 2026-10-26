@@ -273,18 +273,18 @@
                placeholder="Ex. Préparer ma présentation"
                required>
 
-        <label class="task-form-label" for="task-sessions-input">
-            Sessions de concentration nécessaires
+        <label class="task-form-label" for="task-minutes-input">
+            Durée estimée de la tâche (en minutes)
         </label>
         <div class="task-sessions-field">
-            <input id="task-sessions-input"
-                   name="sessions"
-                   type="number"
-                   min="1"
-                   max="99"
-                   value="1"
-                   required>
-            <span>session(s)</span>
+            <input id="task-minutes-input"
+                name="minutes"
+                type="number"
+                min="1"
+                step="1"
+                value="25"
+                required>
+            <span>minutes</span>
         </div>
 
         <button type="submit" class="start-button save-button">
