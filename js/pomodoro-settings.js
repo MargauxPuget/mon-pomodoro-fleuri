@@ -20,6 +20,9 @@ openSettings.addEventListener("click", () => {
 
     settingsDialog.showModal();
 
+    volumeInput.value = settings.volume ?? 50;
+    volumeValue.textContent = `${volumeInput.value} %`;
+
 });
 
 
@@ -65,6 +68,10 @@ settingsForm.addEventListener("submit", event => {
 
         cycles: Number(
             document.getElementById("cycles-input").value
+        ),
+
+        volume: Number(
+           volumeInput.value
         )
 
     };
@@ -73,7 +80,8 @@ settingsForm.addEventListener("submit", event => {
         work: [1, 180],
         short: [1, 60],
         long: [1, 90],
-        cycles: [1, 12]
+        cycles: [1, 12],
+        volume: [0, 100]
     };
 
     for (const key in newSettings) {
@@ -142,3 +150,17 @@ startButton.addEventListener("click", toggleTimer);
 resetButton.addEventListener("click", resetTimer);
 
 skipButton.addEventListener("click", skipSession);
+
+
+/* ==================================
+   VOLUME DU SIGNAL SONORE
+================================== */
+
+const volumeInput = document.getElementById("volume-input");
+const volumeValue = document.getElementById("volume-value");
+
+if (volumeInput && volumeValue) {
+    volumeInput.addEventListener("input", () => {
+        volumeValue.textContent = `${volumeInput.value} %`;
+    });
+}

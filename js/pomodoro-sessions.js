@@ -25,8 +25,15 @@ function playSound() {
             audioContext.currentTime
         );
 
+        const volume = Number(volumeInput?.value ?? 50) / 100;
+
+        if (volume === 0) {
+            audioContext.close();
+            return;
+        }
+
         gain.gain.exponentialRampToValueAtTime(
-            0.12,
+            0.12 * volume,
             audioContext.currentTime + 0.03
         );
 

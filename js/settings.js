@@ -9,7 +9,8 @@ const defaultSettings = {
     work: 25,
     short: 5,
     long: 15,
-    cycles: 4
+    cycles: 4,
+    volume: 50
 };
 
 // Charger les réglages sauvegardés
@@ -24,7 +25,8 @@ function loadSettings() {
                 work: validateSetting(parsed.work, 25, 1, 180),
                 short: validateSetting(parsed.short, 5, 1, 60),
                 long: validateSetting(parsed.long, 15, 1, 90),
-                cycles: validateSetting(parsed.cycles, 4, 1, 12)
+                cycles: validateSetting(parsed.cycles, 4, 1, 12),
+                volume: validateSetting(parsed.volume, 50, 0, 100)
             };
         }
     } catch (error) {

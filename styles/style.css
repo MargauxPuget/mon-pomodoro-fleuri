@@ -1168,3 +1168,21 @@ h1 span {
     font-size: 10px;
     line-height: 1.4;
 }
+
+
+/* Réglage du volume sonore */
+#volume-input {
+    width: 150px;
+    height: 6px;
+    margin: 0;
+    accent-color: var(--pink);
+    cursor: pointer;
+}
+
+#volume-value {
+    min-width: 42px;
+    color: var(--pink);
+    font-size: 14px;
+    font-weight: 600;
+    text-align: right;
+}
