@@ -31,6 +31,7 @@ taskForm.addEventListener("submit", event => {
 
     const title = taskTitleInput.value.trim();
     const minutes = Number(taskMinutesInput.value);
+    const category = document.getElementById("task-category-input").value;
 
     if (!title) {
         taskTitleInput.focus();
@@ -46,6 +47,7 @@ taskForm.addEventListener("submit", event => {
         id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
         title,
         minutes,
+        category,
         completed: false,
         status: taskCreationTarget,
         plannedDate: null,

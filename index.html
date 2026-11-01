@@ -22,6 +22,9 @@
     <!-- Feuille de style -->
     <link rel="stylesheet" href="styles/style.css">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images\Chronomètre-fleuri-rose.png">
+
 </head>
 
 <body>
@@ -55,7 +58,20 @@
             </p>
         </section>
 
+        <!-- Légende des catégories -->
+        <section class="category-legend" aria-label="Légende des catégories">
+            <span class="category-legend-title">Mes catégories</span>
 
+            <div class="category-legend-items">
+                <span><i style="--category-color: #DDA6B2"></i>Concours</span>
+                <span><i style="--category-color: #A8B99A"></i>Tâche ménagère</span>
+                <span><i style="--category-color: #D9BD8C"></i>Cuisine</span>
+                <span><i style="--category-color: #B8A5CE"></i>Bricolage</span>
+                <span><i style="--category-color: #9EADBF"></i>Administratif</span>
+                <span><i style="--category-color: #91AE8A"></i>Jardin</span>
+            </div>
+        </section>
+        
         <!-- Espace de travail : minuteur + tâches -->
         <div class="workspace-grid">
 
@@ -286,6 +302,24 @@
                 required>
             <span>minutes</span>
         </div>
+
+        <label class="task-form-label" for="task-category-input">
+            Catégorie
+        </label>
+
+        <select
+            class="task-title-input"
+            id="task-category-input"
+            name="category"
+        >
+            <option value="">Sans catégorie</option>
+            <option value="concours">📖 Concours</option>
+            <option value="menagere">🧹 Tâche ménagère</option>
+            <option value="cuisine">🍽️ Cuisine</option>
+            <option value="bricolage">🪚 Bricolage</option>
+            <option value="administratif">📄 Administratif</option>
+            <option value="jardin">🪴 Jardin</option>
+        </select>
 
         <button type="submit" class="start-button save-button">
             Ajouter à ma liste ♡
