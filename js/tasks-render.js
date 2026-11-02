@@ -1,94 +1,5 @@
 // Création des lignes et affichage des tâches
 
-const taskCategories = {
-    concours: {
-        label: "Concours",
-        color: "#DDA6B2"
-    },
-    menagere: {
-        label: "Tâche ménagère",
-        color: "#A8B99A"
-    },
-    cuisine: {
-        label: "Cuisine",
-        color: "#D9BD8C"
-    },
-    bricolage: {
-        label: "Bricolage",
-        color: "#B8A5CE"
-    },
-    administratif: {
-        label: "Administratif",
-        color: "#9EADBF"
-    },
-    jardin: {
-        label: "Jardin",
-        color: "#91AE8A"
-    }
-};
-
-function createTaskCategoryIcon(category) {
-    const icons = {
-        concours: `
-            <path d="M7 4h10a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/>
-            <path d="M5 7h12M9 8v9"/>
-        `,
-        menagere: `
-            <path d="M4 14h13l-1.5 6h-10Z"/>
-            <path d="M7 14l9-10M14 3l4 2"/>
-            <path d="M6 17h9"/>
-        `,
-        cuisine: `
-            <circle cx="12" cy="12" r="7"/>
-            <circle cx="12" cy="12" r="4"/>
-            <path d="M3 5v6M1 5v4M5 5v4M3 11v8"/>
-            <path d="M21 5v14M19 5v5h2"/>
-        `,
-        bricolage: `
-            <path d="M3 17l12-12 4 4L7 21Z"/>
-            <path d="M5 15l2 2M8 12l2 2M11 9l2 2"/>
-            <path d="M3 21h18"/>
-        `,
-        administratif: `
-            <path d="M7 4h10v15H7z"/>
-            <path d="M10 8h5M10 11h5M10 14h5"/>
-            <path d="M5 7H4v15h11v-1"/>
-        `,
-        jardin: `
-            <path d="M6 13h12l-2 8H8Z"/>
-            <path d="M12 13V7"/>
-            <path d="M12 9c-5 0-6-4-6-4s5-1 6 4Z"/>
-            <path d="M12 8c0-4 4-5 6-4 0 0-1 4-6 4Z"/>
-        `
-    };
-
-    if (!icons[category]) return null;
-
-    const svg = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "svg"
-    );
-
-    svg.setAttribute("viewBox", "0 0 24 24");
-    svg.setAttribute("class", "task-category-icon");
-    svg.setAttribute("aria-hidden", "true");
-    svg.setAttribute("fill", "none");
-    svg.setAttribute("stroke", "currentColor");
-    svg.setAttribute("stroke-width", "1.6");
-    svg.setAttribute("stroke-linecap", "round");
-    svg.setAttribute("stroke-linejoin", "round");
-
-    const group = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "g"
-    );
-
-    group.innerHTML = icons[category];
-    svg.appendChild(group);
-
-    return svg;
-}
-
 function makeButton(text, className, label, action) {
     const button = document.createElement("button");
     button.type = "button";
@@ -155,19 +66,6 @@ function createTaskRow(task, location) {
         item.classList.add("task-needs-reschedule");
     }
     if (task.completed) item.classList.add("is-completed");
-
-    const category = taskCategories[task.category];
-    
-    if (category) {
-        categoryBadge = document.createElement("span");
-        categoryBadge.className = "task-category-badge";
-        categoryBadge.style.color = category.color;
-        item.style.backgroundColor = `${category.color}30`;
-        item.style.borderColor = `${category.color}80`;
-
-        categoryBadge.setAttribute("aria-label", category.label);
-        categoryBadge.title = category.label;
-    }
 
     item.append(
         createTaskCheckbox(task),

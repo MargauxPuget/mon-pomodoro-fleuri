@@ -4,15 +4,7 @@ function formatDuration(totalMinutes) {
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
 
-    if (hours === 0) {
-        return `${minutes}min`;
-    }
-
-    if (minutes === 0) {
-        return `${hours}h`;
-    }
-
-    return `${hours}h${minutes}`;
+    return `${hours}h${String(minutes).padStart(2, "0")}`;
 }
 
 function getMonday(date = new Date()) {
@@ -120,31 +112,11 @@ function renderPlanning() {
 
             if (task.completed) item.classList.add("is-completed");
 
-            const category = taskCategories[task.category];
-
-            const categoryBadge = document.createElement("span");
-
-            if (category) {
-                categoryBadge.className = "task-category-badge";
-                categoryBadge.setAttribute("aria-label", category.label);
-                categoryBadge.title = category.label;
-                item.style.backgroundColor = `${category.color}30`;
-                item.style.borderColor = `${category.color}80`;
-
-                const categoryIcon = createTaskCategoryIcon(task.category);
-
-                if (categoryIcon) {
-                    categoryBadge.appendChild(categoryIcon);
-                }
-            }
-
             const title = document.createElement("span");
-            title.className = "planning-task-title";
             title.textContent = task.title;
 
             const sessions = document.createElement("small");
-            sessions.className = "planning-task-duration";
-            sessions.textContent = formatDuration(Number(task.minutes) || 0);
+            sessions.textContent = `${task.sessions} session(s)`;
 
             const actions = document.createElement("div");
             actions.className = "planning-task-actions";
@@ -171,10 +143,6 @@ function renderPlanning() {
                     renderTasks();
                 }
             ));
-
-            if (category) {
-                item.appendChild(categoryBadge);
-            }
 
             item.append(title, sessions, actions);
             list.appendChild(item);
