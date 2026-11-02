@@ -115,8 +115,10 @@ function renderPlanning() {
             const title = document.createElement("span");
             title.textContent = task.title;
 
-            const sessions = document.createElement("small");
-            sessions.textContent = `${task.sessions} session(s)`;
+            //todo LAAAA
+            console.log("tache", task);
+            const duration = document.createElement("small");
+            duration.textContent = `${task.minutes} min`;
 
             const actions = document.createElement("div");
             actions.className = "planning-task-actions";
@@ -144,7 +146,7 @@ function renderPlanning() {
                 }
             ));
 
-            item.append(title, sessions, actions);
+            item.append(title, duration, actions);
             list.appendChild(item);
         });
 
