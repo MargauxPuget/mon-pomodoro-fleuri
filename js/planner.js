@@ -115,7 +115,6 @@ function renderPlanning() {
             const title = document.createElement("span");
             title.textContent = task.title;
 
-            //todo LAAAA
             console.log("tache", task);
             const duration = document.createElement("small");
             duration.textContent = `${task.minutes} min`;
