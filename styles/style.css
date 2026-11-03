@@ -1192,3 +1192,12 @@ h1 span {
     border: 1px solid #DDA6B2;
     border-radius: 12px;
 }
+
+.task-item[draggable="true"] {
+    cursor: grab;
+}
+
+.task-item.is-dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+}

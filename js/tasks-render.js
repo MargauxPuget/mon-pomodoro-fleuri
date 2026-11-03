@@ -58,9 +58,61 @@ function createTaskSessions(task) {
     return duration;
 }
 
+function enableTaskDrag(item, task, location) {
+    item.draggable = true;
+
+    item.addEventListener("dragstart", () => {
+        item.classList.add("is-dragging");
+    });
+
+    item.addEventListener("dragend", () => {
+        item.classList.remove("is-dragging");
+    });
+
+    const list = location === "backlog" ? backlogList : nowList;
+
+    item.addEventListener("dragover", event => {
+        event.preventDefault();
+
+        const draggingItem = list.querySelector(".is-dragging");
+
+        if (!draggingItem || draggingItem === item) return;
+
+        const rect = item.getBoundingClientRect();
+        const after = event.clientY > rect.top + rect.height / 2;
+
+        list.insertBefore(
+            draggingItem,
+            after ? item.nextSibling : item
+        );
+    });
+
+    item.addEventListener("drop", () => {
+        const orderedIds = [...list.querySelectorAll(".task-item")]
+            .map(element => {
+                const checkbox = element.querySelector(".task-checkbox");
+                return tasks.find(task => task.id === element.dataset.taskId);
+            })
+            .filter(Boolean);
+
+        const otherTasks = tasks.filter(task => task.status !== locationStatus(location));
+
+        tasks = [...otherTasks, ...orderedIds];
+        saveTasks();
+    });
+
+    item.dataset.taskId = task.id;
+}
+
+function locationStatus(location) {
+    return location === "backlog" ? "backlog" : "now";
+}
+
 function createTaskRow(task, location) {
     const item = document.createElement("li");
     item.className = "task-item";
+
+    enableTaskDrag(item, task, location);
 
     // Restaurer la surbrillance de la tâche
     if (task.highlighted) {
