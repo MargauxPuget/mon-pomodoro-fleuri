@@ -62,6 +62,23 @@ function createTaskRow(task, location) {
     const item = document.createElement("li");
     item.className = "task-item";
 
+    // Restaurer la surbrillance de la tâche
+    if (task.highlighted) {
+        item.classList.add("is-highlighted");
+    }
+
+    // Activer ou retirer la surbrillance au clic
+    item.addEventListener("click", (event) => {
+        // Ne pas déclencher la surbrillance en cliquant sur un bouton
+        if (event.target.closest("button, input, select")) {
+            return;
+        }
+
+        task.highlighted = !task.highlighted;
+        saveTasks();
+        renderTasks();
+    });
+
     if (task.needsReschedule) {
         item.classList.add("task-needs-reschedule");
     }

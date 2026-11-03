@@ -1186,3 +1186,9 @@ h1 span {
     font-weight: 600;
     text-align: right;
 }
+
+.task-item.is-highlighted {
+    background-color: #FCE8ED;
+    border: 1px solid #DDA6B2;
+    border-radius: 12px;
+}
